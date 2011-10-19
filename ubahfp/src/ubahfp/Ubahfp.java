@@ -4,9 +4,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import processing.core.PApplet;
-import processing.opengl.*;
 import codeanticode.glgraphics.*;
-import de.fhpotsdam.unfolding.*;
 import de.fhpotsdam.unfolding.geo.*;
 import de.fhpotsdam.unfolding.utils.*;
 
@@ -15,7 +13,7 @@ public class Ubahfp extends PApplet {
 
 	de.fhpotsdam.unfolding.Map map;
 	
-	  Vector<Location> positions = new Vector<Location>();
+	  Vector<Anlage> positions = new Vector<Anlage>();
 	
 	public void setup() {
 		  size(800, 600, GLConstants.GLGRAPHICS);
@@ -51,16 +49,20 @@ public class Ubahfp extends PApplet {
 		  }
 		}
 
-
+		println(csv[1][0]);
+		
 		// fill positions vector
 		for(int j=1; j < csv.length; j++){
 		   try{
-		      positions.add(new Location(Float.valueOf((csv[j][22]).trim()).floatValue(),Float.valueOf((csv[j][23]).trim()).floatValue()));
+			   Anlage a = new Anlage(Float.valueOf((csv[j][22]).trim()).floatValue(),Float.valueOf((csv[j][23]).trim()).floatValue());
+			   a.setData(csv[j][0], csv[j][1], Integer.parseInt(csv[j][5]), Float.valueOf((csv[j][6]).trim()).floatValue(), Float.valueOf((csv[j][17]).trim()).floatValue(), Float.valueOf((csv[j][18]).trim()).floatValue());
+		      positions.add(a);
 //		      println(Float.valueOf((csv[j][23]).trim()).floatValue());
 		  }catch (NumberFormatException nfe){
-		    System.out.println("NumberFormatException: " + nfe.getMessage());
+		    System.out.println("NumberFormatException in row "+(j+1)+" : " + nfe.getMessage());
 		  }	
 		}
+		println(positions.size()+" Anlagen in positions");
 	}
 
 	public void draw() {
@@ -71,12 +73,12 @@ public class Ubahfp extends PApplet {
 
 		  // draw all positions
 		  fill(0, 200, 0, 100);
-		   Iterator<Location> itr = positions.iterator();
+		   Iterator<Anlage> itr = positions.iterator();
 		    while(itr.hasNext()){
-		   Location t = itr.next();
+		   Anlage t = itr.next();
 		   float xyT[] = map.getScreenPositionFromLocation(t);
 		//   float s = map.getZoom();
-		   ellipse(xyT[0],xyT[1], 5,5);
+		   ellipse(xyT[0],xyT[1], t.getJahresabwassermenge()/1000000,t.getJahresabwassermenge()/1000000);
 		    }
 
 		//  // Fixed-size marker
