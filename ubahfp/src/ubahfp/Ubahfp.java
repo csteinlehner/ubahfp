@@ -10,7 +10,6 @@ import de.fhpotsdam.unfolding.*;
 import de.fhpotsdam.unfolding.geo.*;
 import de.fhpotsdam.unfolding.utils.*;
 
-
 public class Ubahfp extends PApplet {
 
 	de.fhpotsdam.unfolding.Map map;
@@ -18,6 +17,10 @@ public class Ubahfp extends PApplet {
 	  Vector<Location> positions = new Vector<Location>();
 	
 	public void setup() {
+		
+		
+		// SIMON WAS HERE
+		
 		  size(800, 600, GLConstants.GLGRAPHICS);
 		  noStroke();
 
