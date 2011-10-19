@@ -8,7 +8,6 @@ import codeanticode.glgraphics.*;
 import de.fhpotsdam.unfolding.geo.*;
 import de.fhpotsdam.unfolding.utils.*;
 
-
 public class Ubahfp extends PApplet {
 
 	de.fhpotsdam.unfolding.Map map;
@@ -16,6 +15,12 @@ public class Ubahfp extends PApplet {
 	  Vector<Anlage> positions = new Vector<Anlage>();
 	
 	public void setup() {
+		
+		
+		// SIMON WAS HERE
+		
+		// AGAIN!
+		
 		  size(800, 600, GLConstants.GLGRAPHICS);
 		  noStroke();
 
