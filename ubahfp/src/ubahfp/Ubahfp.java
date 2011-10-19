@@ -54,7 +54,6 @@ public class Ubahfp extends PApplet {
 		  }
 		}
 
-		println(csv[1][0]);
 		
 		// fill positions vector
 		for(int j=1; j < csv.length; j++){
@@ -83,7 +82,7 @@ public class Ubahfp extends PApplet {
 		   Anlage t = itr.next();
 		   float xyT[] = map.getScreenPositionFromLocation(t);
 		//   float s = map.getZoom();
-		   ellipse(xyT[0],xyT[1], t.getJahresabwassermenge()/1000000,t.getJahresabwassermenge()/1000000);
+		   ellipse(xyT[0],xyT[1], t.getnAblauf()/10000,t.getpAblauf()/1000);
 		    }
 
 		//  // Fixed-size marker
