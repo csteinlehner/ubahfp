@@ -44,5 +44,4 @@ public class Anlage extends Location {
 	public float getJahresabwassermenge(){
 		return jahresabwassermenge;
 	}
-
 }

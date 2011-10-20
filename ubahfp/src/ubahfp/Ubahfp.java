@@ -31,7 +31,6 @@ public class Ubahfp extends PApplet {
 	public void draw() {
 		  background(0);
 		  map.draw();
-
 		  // Draws locations on screen positions according to their geo-locations.
 
 		  // draw all positions

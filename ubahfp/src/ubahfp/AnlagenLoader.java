@@ -54,10 +54,8 @@ public class AnlagenLoader {
 		  }	
 		}
 		p5.println(positions.size()+" Anlagen in positions");
-
 		  
 	  }
-	  
 	  public Vector<Anlage> getPositions() {
 			return positions;
 		}
