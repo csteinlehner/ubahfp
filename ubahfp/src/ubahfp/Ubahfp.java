@@ -13,84 +13,27 @@ public class Ubahfp extends PApplet {
 
 	de.fhpotsdam.unfolding.Map map;
 
-	Vector<Anlage> positions = new Vector<Anlage>();
-
-	Iterator<Anlage> itr;
 
 	int switsch = 0; // schaltet zwischen versch. Attributen der Kläranlagen um
 	String attribut;
 
+	
+	private AnlagenLoader al = new AnlagenLoader(this);
+	private Vector<Anlage> positions;
+	
 	public void setup() {
 
-		size(800, 600, GLConstants.GLGRAPHICS);
-		// size(800, 600);
-
-		noStroke();
-
-		smooth();
-		hint(ENABLE_OPENGL_4X_SMOOTH);
-
-		map = new de.fhpotsdam.unfolding.Map(this);
-		map.setTweening(true);
-		map.zoomToLevel(6);
-		map.panTo(new Location(51.5f, 11f));
-		MapUtils.createDefaultEventDispatcher(this, map);
-
-		String lines[] = loadStrings("pl_dp_join_2008_02_latlong.csv");
-		String[][] csv;
-		int csvWidth = 0;
-
-		// calculate max width of csv file
-		for (int i = 0; i < lines.length; i++) {
-			String[] chars = split(lines[i], ';');
-			if (chars.length > csvWidth) {
-				csvWidth = chars.length;
-			}
+				
+		  size(800, 600, GLConstants.GLGRAPHICS);
+		  noStroke();
+		  map = new de.fhpotsdam.unfolding.Map(this);
+		  map.setTweening(true);
+		  map.zoomToLevel(6);
+		  map.panTo(new Location(51.5f, 11f));
+		  MapUtils.createDefaultEventDispatcher(this, map);
+		  positions = al.getPositions();
 		}
 
-		// create csv array based on # of rows and columns in csv file
-		csv = new String[lines.length][csvWidth];
-
-		// parse values into 2d array
-		for (int i = 0; i < lines.length; i++) {
-			String[] temp = new String[lines.length];
-			temp = split(lines[i], ';');
-			for (int j = 0; j < temp.length; j++) {
-				csv[i][j] = temp[j];
-			}
-		}
-
-		println(csv[1][0]);
-
-		// fill positions vector
-		for (int j = 1; j < csv.length; j++) {
-			try {
-				Anlage a = new Anlage(Float.valueOf((csv[j][22]).trim())
-						.floatValue(), Float.valueOf((csv[j][23]).trim())
-						.floatValue());
-				a.setData(csv[j][0], csv[j][1], csv[j][21], 
-						Integer.parseInt(csv[j][5]),
-						Float.valueOf((csv[j][6]).trim()).floatValue(), 
-						Float.valueOf((csv[j][17]).trim()).floatValue(),
-						Float.valueOf((csv[j][18]).trim()).floatValue(),
-						Integer.valueOf((csv[j][8]).trim()).intValue(),
-						Integer.valueOf((csv[j][9]).trim()).intValue(),
-						Integer.valueOf((csv[j][10]).trim()).intValue(),
-						Integer.valueOf((csv[j][11]).trim()).intValue(),
-						Integer.valueOf((csv[j][12]).trim()).intValue(),
-						Integer.valueOf((csv[j][13]).trim()).intValue(),
-						Integer.valueOf((csv[j][14]).trim()).intValue(),
-						Integer.valueOf((csv[j][15]).trim()).intValue()
-						);
-				positions.add(a);
-				// println(Float.valueOf((csv[j][23]).trim()).floatValue());
-			} catch (NumberFormatException nfe) {
-				System.out.println("NumberFormatException in row " + (j + 1)
-						+ " : " + nfe.getMessage());
-			}
-		}
-		println(positions.size() + " Anlagen in positions");
-	}
 
 	public void draw() {
 
@@ -100,12 +43,13 @@ public class Ubahfp extends PApplet {
 
 		// Draws locations on screen positions according to their geo-locations.
 
-		// draw all positions
-		itr = positions.iterator();
-		while (itr.hasNext()) {
-			Anlage t = itr.next();
-			float xyT[] = map.getScreenPositionFromLocation(t);
-			// float s = map.getZoom();
+		  // draw all positions
+		  fill(0, 200, 0, 100);
+		   Iterator<Anlage> itr = positions.iterator();
+		    while(itr.hasNext()){
+		   Anlage t = itr.next();
+		   float xyT[] = map.getScreenPositionFromLocation(t);
+		//   float s = map.getZoom();
 			fill(0, 200, 0, 100);
 
 			// fill(0);
