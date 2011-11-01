@@ -27,7 +27,7 @@ public class Verdraengung extends PApplet {
 		  size(800, 600, GLConstants.GLGRAPHICS);
 		  noStroke();
 		  map = new de.fhpotsdam.unfolding.Map(this);
-		  map.setTweening(true);
+		  map.setTweening(false);
 		  map.zoomToLevel(6);
 		  map.panTo(new Location(51.5f, 11f));
 		  MapUtils.createDefaultEventDispatcher(this, map);
@@ -35,9 +35,8 @@ public class Verdraengung extends PApplet {
 		  Iterator<AnlageVerdraengung> itr =  positions.iterator();
 		  while(itr.hasNext()){
 		   	AnlageVerdraengung t = itr.next();
-			t.setRadius(t.getAusbaugroesse() / 10000);
+			t.setMaxRadius(t.getAusbaugroesse() / 10000);
 		  }
-		  checkHit();
 		}
 
 
@@ -57,11 +56,18 @@ public class Verdraengung extends PApplet {
 
 			// fill(0);
 			// ellipse(xyT[0],xyT[1], 3,3);
+//			checkHit();
 			Iterator<AnlageVerdraengung> itr =  positions.iterator();
 		    while(itr.hasNext()){
 		    	AnlageVerdraengung t = itr.next();
-		 
-			ellipse(t.getPos().x, t.getPos().y, t.getRadius(), t.getRadius());
+		if(t.isScaling){
+			t.setRadius(t.getRadius()+1);
+		}
+		if(t.getRadius()>=t.getMaxRadius()){
+			t.isScaling=false;
+		}
+			float xyT[] = map.getScreenPositionFromLocation(t);
+			ellipse(xyT[0], xyT[1], t.getRadius(), t.getRadius());
 		    }
 	}
 
@@ -75,10 +81,11 @@ public class Verdraengung extends PApplet {
 		    	 Iterator<AnlageVerdraengung> itr2 =  positions.iterator();
 		    	 while(itr2.hasNext()){
 		    		 AnlageVerdraengung t2 = itr2.next();	 
-		    		 
 		    		 if(t!=t2){
+			    		 float xyT2[] = map.getScreenPositionFromLocation(t2);
+			    		 t2.setPos(xyT2);
 		    		      if(t.getPos().dist(t2.getPos())<t.getRadius()+t2.getRadius()){
-		    		       fill(255,0,0);
+//		    		       fill(255,0,0);
 		    		        PVector distanceV = PVector.sub(t.getPos(), t2.getPos());
 		    		        float theta  = atan2(distanceV.y, distanceV.x);
 		    		        PVector mDistance = new PVector(t.getRadius()+t2.getRadius(),0);

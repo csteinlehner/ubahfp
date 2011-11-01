@@ -23,6 +23,7 @@ public class ManualPlot extends PApplet {
 		  while(itr.hasNext()){
 		   	AnlageVerdraengung t = itr.next();
 		   	t.setPos(t);
+		   	t.setPos(new PVector(map(t.x,40,60,50,500),map(t.y,0,20,50,500)));
 			t.setRadius(t.getAusbaugroesse() / 10000);
 			checkHit(t);
 			println(t.getPos());
@@ -32,10 +33,14 @@ public class ManualPlot extends PApplet {
 	}
 	
 	public void draw(){
+		background(0);
 		  Iterator<AnlageVerdraengung> itr2 =  positions.iterator();
 		  while(itr2.hasNext()){
 		   	AnlageVerdraengung t = itr2.next();
-		  ellipse(map(t.getPos().x,40,60,50,500), map(t.getPos().y,0,15,50,500), t.getRadius(), t.getRadius());
+		   	checkHit(t);
+		   	ellipseMode(CENTER);
+//		    ellipse(map(t.getPos().x,40,60,50,500), map(t.getPos().y,0,20,50,500), t.getRadius(), t.getRadius());
+		    ellipse(t.getPos().x,t.getPos().y, t.getRadius(), t.getRadius());
 		  }
 		
 	}
