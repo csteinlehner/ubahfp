@@ -6,6 +6,7 @@ public class Hex {
 	
 	
 	PVector[] points;
+	
 	private float side;
 	private float h;
 	private float r;
@@ -23,8 +24,10 @@ public class Hex {
 		this.y = y;
 		this.side = side;
 		this.orientation = orientation;
-		CalculateVertices();
 		this.hexState = new HexState();
+		
+		CalculateVertices();
+
 		
 	}
 
@@ -34,8 +37,10 @@ public class Hex {
 		this.y = point.y;
 		this.side = side;
 		this.orientation = orientation;
-		CalculateVertices();
 		this.hexState = new HexState();
+
+		CalculateVertices();
+
 
 	}
 	
@@ -45,8 +50,11 @@ public class Hex {
 		this.points = points;
 		this.side = side;
 		this.orientation = orientation;
-		CalculateVertices();
 		this.hexState = new HexState();
+		
+		CalculateVertices();
+
+
 
 	}
 
