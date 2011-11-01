@@ -17,7 +17,7 @@ public class TileMill2 extends PApplet{
 		// Connection to SQLite/MBTiles in distribution (outside of the jar)
 //		public static final String JDBC_CONN_STRING_TABLE = "jdbc:sqlite:./data/muse-dark-2-8.mbtiles";
 		// Connection to SQLite/MBTiles in dev environemtn (link to the project)
-	public static final String JDBC_CONN_STRING_MAC = "jdbc:sqlite:controlroom.mbtiles";
+	public static final String JDBC_CONN_STRING_MAC = "jdbc:sqlite:../data/uba.mbtiles";
 
 		Map map;
 
@@ -33,7 +33,8 @@ public class TileMill2 extends PApplet{
 			       }
 			map = new Map(this, 0, 0, width, height, new MBTilesMapProvider(JDBC_CONN_STRING_MAC));
 			MapUtils.createDefaultEventDispatcher(this, map);
-			map.setZoomRange(2, 9);
+			map.setZoomRange(8, 8);
+			map.zoom(8);
 		}
 
 		public void draw() {

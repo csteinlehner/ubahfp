@@ -6,14 +6,17 @@ import java.util.Vector;
 
 import processing.core.*;
 import codeanticode.glgraphics.*;
+import de.fhpotsdam.unfolding.Map;
 import de.fhpotsdam.unfolding.geo.*;
+import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.utils.*;
 
 public class Ubahfp extends PApplet {
 
 	de.fhpotsdam.unfolding.Map map;
-
-
+	de.fhpotsdam.unfolding.Map watermap;
+	public static final String JDBC_CONN_STRING_MAC = "jdbc:sqlite:../data/uba.mbtiles";
+	
 	int switsch = 0; // schaltet zwischen versch. Attributen der Kläranlagen um
 	String attribut;
 
@@ -27,10 +30,14 @@ public class Ubahfp extends PApplet {
 		  size(800, 600, GLConstants.GLGRAPHICS);
 		  noStroke();
 		  map = new de.fhpotsdam.unfolding.Map(this);
-		  map.setTweening(true);
-		  map.zoomToLevel(6);
+		  map.setTweening(false);
+		  map.zoomToLevel(7);
 		  map.panTo(new Location(51.5f, 11f));
-		  MapUtils.createDefaultEventDispatcher(this, map);
+		  watermap = new Map(this, 0, 0, width, height, new MBTilesMapProvider(JDBC_CONN_STRING_MAC));
+		  watermap.setTweening(false);
+		  watermap.zoomToLevel(7);
+		  watermap.panTo(new Location(51.5f, 11f));
+		  MapUtils.createDefaultEventDispatcher(this, map, watermap);
 		  positions = al.getPositions();
 		}
 
@@ -39,8 +46,8 @@ public class Ubahfp extends PApplet {
 
 		// System.out.println(frameRate);
 		background(0);
-		map.draw();
-
+//		map.draw();
+		watermap.draw();
 		// Draws locations on screen positions according to their geo-locations.
 
 		  // draw all positions
