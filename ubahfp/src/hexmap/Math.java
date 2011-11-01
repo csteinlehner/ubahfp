@@ -35,33 +35,24 @@ public class Math {
 	//     \/
 	// Pointy orientation (scale is off)
 
-	public static double DegreesToRadians(double degrees)
+	public static double degreesToRadians(double degrees)
 	{
 		//http://en.wikipedia.org/wiki/Radians
 		return degrees * PApplet.PI / 180;
 	}
 
-	public static double RadiansToDegrees(double radians)
+	public static double radiansToDegrees(double radians)
 	{
 		return radians * 180 / PApplet.PI;
 	}
 
-	public static float ConvertToFloat(double d)
-	{
-		return (float)d;
-	}
-
-	public static float ConvertToFloat(int i)
-	{
-		return (float)i;
-	}
 
 	/// <summary>
 	/// Outside triangle side (short)
 	/// </summary>
 	public static float CalculateH(float side)
 	{
-		return ConvertToFloat(PApplet.sin(PApplet.radians(30)) * side);
+		return PApplet.sin(PApplet.radians(30)) * side;
 	}
 
 	/// <summary>
@@ -69,7 +60,7 @@ public class Math {
 	/// </summary>
 	public static float CalculateR(float side)
 	{
-		return ConvertToFloat(PApplet.cos(PApplet.radians(30) * side));
+		return PApplet.cos(PApplet.radians(30)) * side;
 	}
 
 
