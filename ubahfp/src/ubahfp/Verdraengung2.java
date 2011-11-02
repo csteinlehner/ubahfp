@@ -39,7 +39,7 @@ public class Verdraengung2 extends PApplet {
 		   	AnlageVerdraengung t = itr.next();
 			  float xyT[] = map.getScreenPositionFromLocation(t);
 			  t.setPos(xyT);		   	
-			  t.setMaxRadius(t.getAusbaugroesse() / 30000);
+			  t.setMaxRadius(sqrt(t.getAusbaugroesse()/1000/PI));
 		  }
 
 		  Collections.sort(positions, new MaxRadiusComparator());
@@ -123,7 +123,7 @@ public class Verdraengung2 extends PApplet {
 		switch (switsch) {
 
 		case 0:
-			t.setRadius(t.getAusbaugroesse() / 10000);
+			t.setRadius(sqrt(t.getAusbaugroesse()/1000/PI));
 			break;
 
 		case 1:

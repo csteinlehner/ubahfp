@@ -27,16 +27,19 @@ public class Ubahfp extends PApplet {
 	public void setup() {
 
 				
-		  size(800, 600, GLConstants.GLGRAPHICS);
+		  size(820, 820, GLConstants.GLGRAPHICS);
 		  noStroke();
 		  map = new de.fhpotsdam.unfolding.Map(this);
 		  map.setTweening(false);
-		  map.zoomToLevel(7);
+		  map.zoomToLevel(6);
 		  map.panTo(new Location(51.5f, 11f));
+		  map.setZoomRange(6, 15);
 		  watermap = new Map(this, 0, 0, width, height, new MBTilesMapProvider(JDBC_CONN_STRING_MAC));
 		  watermap.setTweening(false);
-		  watermap.zoomToLevel(7);
+		  watermap.zoomToLevel(6);
+		  watermap.setZoomRange(6, 15);
 		  watermap.panTo(new Location(51.5f, 11f));
+		  
 		  MapUtils.createDefaultEventDispatcher(this, map, watermap);
 		  positions = al.getPositions();
 		}
@@ -66,23 +69,19 @@ public class Ubahfp extends PApplet {
 			switch (switsch) {
 
 			case 0:
-				ellipse(xyT[0], xyT[1], t.getAusbaugroesse() / 10000,
-						t.getAusbaugroesse() / 10000);
+				ellipse(xyT[0], xyT[1], sqrt(t.getAusbaugroesse()/1000/PI), sqrt(t.getAusbaugroesse()/1000/PI));
 				break;
 
 			case 1:
-				ellipse(xyT[0], xyT[1], t.getJahresabwassermenge() / 1000000,
-						t.getJahresabwassermenge() / 1000000);
+				ellipse(xyT[0], xyT[1], sqrt(t.getJahresabwassermenge()/50000/PI), sqrt(t.getJahresabwassermenge()/50000/PI));
 				break;
 
 			case 2:
-				ellipse(xyT[0], xyT[1], t.getnAblauf() / 10000,
-						t.getnAblauf() / 10000);
+				ellipse(xyT[0], xyT[1], sqrt(t.getnAblauf()/1000/PI), sqrt(t.getnAblauf()/1000/PI));
 				break;
 
 			case 3:
-				ellipse(xyT[0], xyT[1], t.getpAblauf() / 1000,
-						t.getpAblauf() / 1000);
+				ellipse(xyT[0], xyT[1], sqrt(t.getpAblauf()/100/PI), sqrt(t.getpAblauf()/100/PI));
 				break;
 				
 			case 4:
