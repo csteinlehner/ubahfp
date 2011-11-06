@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import processing.core.*;
+import ubahfp.singleDataPlots.SingleDataCircle;
 import codeanticode.glgraphics.*;
 import de.fhpotsdam.unfolding.Map;
 import de.fhpotsdam.unfolding.geo.*;
@@ -15,7 +16,7 @@ public class Ubahfp extends PApplet {
 
 	de.fhpotsdam.unfolding.Map map;
 	de.fhpotsdam.unfolding.Map watermap;
-	public static final String JDBC_CONN_STRING_MAC = "jdbc:sqlite:../data/uba.mbtiles";
+	public static final String JDBC_CONN_STRING_MAC = "jdbc:sqlite:../data/uba6-13.mbtiles";
 	
 	int switsch = 0; // schaltet zwischen versch. Attributen der Kläranlagen um
 	String attribut;
@@ -23,6 +24,7 @@ public class Ubahfp extends PApplet {
 	
 	private AnlagenLoader al = new AnlagenLoader(this);
 	private Vector<Anlage> positions;
+	private Vector<SingleDataCircle> datas = new Vector<SingleDataCircle>();
 	
 	public void setup() {
 
@@ -42,6 +44,9 @@ public class Ubahfp extends PApplet {
 		  
 		  MapUtils.createDefaultEventDispatcher(this, map, watermap);
 		  positions = al.getPositions();
+//		  for(Anlage a : positions){
+//			  datas.add(new SingleDataCircle(this, a));
+//		  }
 		}
 
 
@@ -52,7 +57,14 @@ public class Ubahfp extends PApplet {
 //		map.draw();
 		watermap.draw();
 		// Draws locations on screen positions according to their geo-locations.
-
+		
+//		/**
+//		 * Draw Datas
+//		 * 
+//		 */
+//		for(SingleDataCircle d : datas){
+//			d.draw();
+//		}
 		  // draw all positions
 		  fill(0, 200, 0, 100);
 		   Iterator<Anlage> itr = positions.iterator();
@@ -64,7 +76,7 @@ public class Ubahfp extends PApplet {
 
 			// fill(0);
 			// ellipse(xyT[0],xyT[1], 3,3);
-
+			
 			
 			switch (switsch) {
 
@@ -470,8 +482,10 @@ public class Ubahfp extends PApplet {
 				}
 				break;
 			}
+		
 			
-
+			
+			
 			// // Fixed-size marker
 			// float xyBerlin[] =
 			// map.getScreenPositionFromLocation(locationBerlin);
